@@ -1,0 +1,18 @@
+# Folosește o imagine de bază Python
+FROM python:3.9-slim
+
+# Setează directorul de lucru
+WORKDIR /app
+
+# Copiază fișierele requirements și instalează dependențele
+COPY app/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiază aplicația
+COPY app /app
+
+# Expune portul 8000
+EXPOSE 8000
+
+# Rulează aplicația
+CMD ["uvicorn", "compito:app", "--host", "0.0.0.0", "--port", "8000"]
